@@ -1,0 +1,186 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+.container {
+    height: 100vh;
+    background-color: #674BAF;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+    padding: 0 20px;
+}
+
+nav {
+    text-align: left;
+    margin: 45px 0;
+    margin-left: 5%;
+}
+
+.main-section {
+    display: flex;
+    justify-content: space-evenly;
+    text-align: left;
+}
+
+.main-section>div:last-child {
+    width: 40%;
+    color: white;
+}
+
+.main-section>div:last-child p {
+    font-size: 18px;
+}
+
+.header {
+    font-weight: bold;
+    font-size: 45px;
+}
+
+button {
+    font-size: 20px;
+    padding: 13px;
+    background-color: white;
+    width: 250px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    color: #674BAF;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 8px 17px -8px black;
+    cursor: pointer;
+    border: 3px solid white;
+}
+
+button:hover {
+    color: white;
+    background: rgba(103, 75, 175, 0.9);
+}
+
+.footer {
+    font-size: 40px;
+    margin: 10px 70px;
+    text-align: end;
+}
+
+.footer i {
+    color: white;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.footer i:hover {
+    transform: translateY(-5px);
+}
+
+.img-fluid {
+    height: 300px;
+}
+
+@media screen and (min-width: 767px) and (max-width: 1350px) {
+    body {
+        overflow: auto;
+    }
+    .container {
+        height: 100vh;
+        background: url('https://res.cloudinary.com/dfkn1kzs0/image/upload/v1588506071/bg-mobile_sb936e.svg');
+        background-color: #674BAF;
+        background-size: cover;
+        background-position: center;
+    }
+    .main-section {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .main-section>div:last-child {
+        width: 80%;
+    }
+    .main-section>div:last-child p {
+        font-size: 15px;
+    }
+    .main-section img {
+        width: 80%;
+    }
+    .header {
+        font-size: 20px;
+    }
+    nav {
+        margin: 10% 0;
+        margin-left: 30px;
+    }
+    nav img {
+        width: 40%;
+    }
+    button {
+        font-size: 15px;
+        padding: 6px;
+        width: 200px;
+    }
+    .footer {
+        margin: 10% 0;
+        text-align: center;
+        font-size: 28px;
+    }
+}
+
+@media screen and (max-width: 766px) {
+    body {
+        overflow: auto;
+    }
+    .container {
+        height: 100%;
+        background: url('https://res.cloudinary.com/dfkn1kzs0/image/upload/v1588506071/bg-mobile_sb936e.svg');
+        background-color: #674BAF;
+        background-size: cover;
+        background-position: center;
+    }
+    .main-section {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .main-section>div:last-child {
+        width: 80%;
+    }
+    .main-section>div:last-child p {
+        font-size: 15px;
+    }
+    .main-section img {
+        width: 80%;
+    }
+    .header {
+        font-size: 20px;
+    }
+    nav {
+        margin: 10% 0;
+        margin-left: 30px;
+    }
+    nav img {
+        width: 40%;
+    }
+    button {
+        font-size: 15px;
+        padding: 6px;
+        width: 200px;
+    }
+    .footer {
+        margin: 20% 0;
+        text-align: center;
+        font-size: 28px;
+    }
+}
