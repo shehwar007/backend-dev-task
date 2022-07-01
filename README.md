@@ -34,6 +34,15 @@ Supper-admin can view,add,edit,del Super-admin,Admin,User,Blogger  / View Blogs
 Admin & User  can view ,add,edit,del only blogger / View Blogs
 Blogger  only add blog & view only own blogs.
 
+in this project we cover
+
+Datatable,Ajax,helper function,middleware
+
+Db info
+
+instead of one table we create four table because its task
+admin,bloggers,super_admin,admin
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
