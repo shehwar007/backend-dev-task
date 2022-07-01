@@ -28,38 +28,42 @@ class UserController extends Controller
     }
     public function insertUser(Request $request)
     {
+        try {
 
-        if ($request->role == "Super-Admin") {
+            if ($request->role == "Super-Admin") {
 
-            $validatedata = $this->validate($request, SuperAdmin::VALIDATION_RULES);
-            $validatedata['password'] = Hash::make($request->password);
-            $user = SuperAdmin::create($validatedata);
+                $validatedata = $this->validate($request, SuperAdmin::VALIDATION_RULES);
+                $validatedata['password'] = Hash::make($request->password);
+                $user = SuperAdmin::create($validatedata);
+            }
+
+            if ($request->role == "Admin") {
+
+                $validatedata = $this->validate($request, Admin::VALIDATION_RULES);
+                $validatedata['password'] = Hash::make($request->password);
+                $user = Admin::create($validatedata);
+            }
+            if ($request->role == "User") {
+
+                $validatedata = $this->validate($request, EndUser::VALIDATION_RULES);
+                $validatedata['password'] = Hash::make($request->password);
+                $user = EndUser::create($validatedata);
+            }
+            if ($request->role == "Blogger") {
+
+                $validatedata = $this->validate($request, Blogger::VALIDATION_RULES);
+                $validatedata['password'] = Hash::make($request->password);
+                $user = Blogger::create($validatedata);
+            }
+
+            $role = new Role;
+            $role->role = $request->role;
+            $role->users_id = $user->id;
+            $role->save();
+            return response(json_encode(true), 200);
+        } catch (exception $e) {
+            return response(json_encode(false), 200);
         }
-
-        if ($request->role == "Admin") {
-
-            $validatedata = $this->validate($request, Admin::VALIDATION_RULES);
-            $validatedata['password'] = Hash::make($request->password);
-            $user = Admin::create($validatedata);
-        }
-        if ($request->role == "User") {
-
-            $validatedata = $this->validate($request, EndUser::VALIDATION_RULES);
-            $validatedata['password'] = Hash::make($request->password);
-            $user = EndUser::create($validatedata);
-        }
-        if ($request->role == "Blogger") {
-
-            $validatedata = $this->validate($request, Blogger::VALIDATION_RULES);
-            $validatedata['password'] = Hash::make($request->password);
-            $user = Blogger::create($validatedata);
-        }
-
-        $role = new Role;
-        $role->role = $request->role;
-        $role->users_id = $user->id;
-        $role->save();
-        return response(json_encode(true), 200);
         // return back();
     }
 
@@ -156,99 +160,95 @@ class UserController extends Controller
     }
     public function deleteUser($id)
     {
-        $data = Role::find($id);
+        try {
+            $data = Role::find($id);
 
-        if ($data->role == "Blogger") {
+            if ($data->role == "Blogger") {
 
-            Blogger::where('id', $data->users_id)->delete();
-        }
-        if ($data->role == "Admin") {
-            Admin::where('id', $data->users_id)->delete();
-        }
-        if ($data->role == "User") {
+                Blogger::where('id', $data->users_id)->delete();
+            }
+            if ($data->role == "Admin") {
+                Admin::where('id', $data->users_id)->delete();
+            }
+            if ($data->role == "User") {
 
-            EndUser::where('id', $data->users_id)->delete();
-        }
-        if ($data->role == "Super-Admin") {
-            SuperAdmin::where('id', $data->users_id)->delete();
-        }
-        $data->delete();
+                EndUser::where('id', $data->users_id)->delete();
+            }
+            if ($data->role == "Super-Admin") {
+                SuperAdmin::where('id', $data->users_id)->delete();
+            }
+            $data->delete();
 
-        return response()->json(true);
+            return response()->json(true);
+        } catch (exception $e) {
+            return response()->json(false);
+        }
     }
 
     public function updateUser(Request $request)
     {
-        $data = Role::find($request->id);
+        try {
 
-        if ($data->role == "Blogger") {
-            $del = Blogger::find($data->users_id);
-            $password = $del->password;
-            $del->delete();
+
+            $data = Role::find($request->id);
+
+            if ($data->role == "Blogger") {
+                $del = Blogger::find($data->users_id);
+                $password = $del->password;
+                $del->delete();
+            }
+            if ($data->role == "Admin") {
+
+                $del = Admin::find($data->users_id);
+                $password = $del->password;
+                $del->delete();
+            }
+            if ($data->role == "User") {
+
+
+                $del = EndUser::find($data->users_id);
+                $password = $del->password;
+                $del->delete();
+            }
+            if ($data->role == "Super-Admin") {
+
+                $del = SuperAdmin::find($data->users_id);
+                $password = $del->password;
+                $del->delete();
+            }
+            if ($request->role == "Super-Admin") {
+
+                $validatedata = $this->validate($request, SuperAdmin::VALIDATION_RULES);
+                $validatedata['password'] = ($request->password) ? Hash::make($request->password) : $password;
+                $user = SuperAdmin::create($validatedata);
+            }
+
+            if ($request->role == "Admin") {
+
+                $validatedata = $this->validate($request, Admin::VALIDATION_RULES);
+                $validatedata['password'] = ($request->password) ? Hash::make($request->password) : $password;
+                $user = Admin::create($validatedata);
+            }
+            if ($request->role == "User") {
+
+                $validatedata = $this->validate($request, EndUser::VALIDATION_RULES);
+                $validatedata['password'] = ($request->password) ? Hash::make($request->password) : $password;
+
+                $user = EndUser::create($validatedata);
+            }
+            if ($request->role == "Blogger") {
+
+                $validatedata = $this->validate($request, Blogger::VALIDATION_RULES);
+                $validatedata['password'] = ($request->password) ? Hash::make($request->password) : $password;
+
+                $user = Blogger::create($validatedata);
+            }
+            $data->role = $request->role;
+            $data->users_id = $user->id;
+            $data->save();
+            return response(json_encode(true), 200);
+        } catch (exception $e) {
+            return response(json_encode(false), 200);
         }
-        if ($data->role == "Admin") {
-
-            $del = Admin::find($data->users_id);
-            $password = $del->password;
-            $del->delete();
-        }
-        if ($data->role == "User") {
-
-
-            $del = EndUser::find($data->users_id);
-            $password = $del->password;
-            $del->delete();
-        }
-        if ($data->role == "Super-Admin") {
-
-            $del = SuperAdmin::find($data->users_id);
-            $password = $del->password;
-            $del->delete();
-        }
-        if ($request->role == "Super-Admin") {
-
-            $validatedata = $this->validate($request, SuperAdmin::VALIDATION_RULES);
-            $validatedata['password'] = ($request->password) ? Hash::make($request->password) : $password;
-            $user = SuperAdmin::create($validatedata);
-        }
-
-        if ($request->role == "Admin") {
-
-            $validatedata = $this->validate($request, Admin::VALIDATION_RULES);
-            $validatedata['password'] = ($request->password) ? Hash::make($request->password) : $password;
-            $user = Admin::create($validatedata);
-        }
-        if ($request->role == "User") {
-
-            $validatedata = $this->validate($request, EndUser::VALIDATION_RULES);
-            $validatedata['password'] = ($request->password) ? Hash::make($request->password) : $password;
-
-            $user = EndUser::create($validatedata);
-        }
-        if ($request->role == "Blogger") {
-
-            $validatedata = $this->validate($request, Blogger::VALIDATION_RULES);
-            $validatedata['password'] = ($request->password) ? Hash::make($request->password) : $password;
-
-            $user = Blogger::create($validatedata);
-        }
-        $data->role = $request->role;
-        $data->users_id = $user->id;
-        $data->save();
-        return response(json_encode(true), 200);
-
-
-
-        // $data->users_id;
-        // if ($request->role == "Super-Admin") {
-
-        //     $validatedata = $this->validate($request, SuperAdmin::VALIDATION_RULES);
-        //     $validatedata['password'] = Hash::make($request->password);
-        //     $user = SuperAdmin::create($validatedata);
-        // }
-
-        // Service::where('id', $request->service_id)
-        // ->update($validatedata);
-        return response()->json("shehwar asif");
     }
 }

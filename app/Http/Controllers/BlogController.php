@@ -39,7 +39,5 @@ class BlogController extends Controller
             return  empty($row->blogger_info->name) ? 'Not Set' : $row->blogger_info->name;
         })->addIndexColumn()->make(true);
         return $result;
-
-        //  return response(json_encode($result),200);
     }
 }
