@@ -31,7 +31,9 @@ Types of Users;
 Super-admin,Admin,User,Blogger
 
 Supper-admin can view,add,edit,del Super-admin,Admin,User,Blogger  / View Blogs
+
 Admin & User  can view ,add,edit,del only blogger / View Blogs
+
 Blogger  only add blog & view only own blogs.
 
 in this project we cover
