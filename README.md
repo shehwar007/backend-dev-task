@@ -19,6 +19,21 @@
 5.Run php artisan migrate:fresh --seed.
 
 That's it: launch the main URL.
+
+username=admin@gmail.com
+
+passowrd=admin
+
+role=Super-admin/admin/user/branch
+
+## Project Feature
+Types of Users;
+Super-admin,Admin,User,Blogger
+
+Supper-admin can view,add,edit,del Super-admin,Admin,User,Blogger  / View Blogs
+Admin & User  can view ,add,edit,del only blogger / View Blogs
+Blogger  only add blog & view only own blogs.
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:

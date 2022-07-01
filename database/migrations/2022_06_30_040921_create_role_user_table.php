@@ -11,7 +11,7 @@ class CreateRoleUserTable extends Migration
      *
      * @return void
      */
-     //  php artisan migrate --path=/database/migrations/2022_06_30_040921_create_role_user_table.php
+     
 
     public function up()
     {
